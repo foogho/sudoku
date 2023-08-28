@@ -108,7 +108,7 @@ suite('Functional Tests', () => {
     const checkPayload = { puzzle, coordinate: 'A2', value: '1' };
     requester
       .post('/api/check')
-      .send({ checkPayload })
+      .send(checkPayload)
       .end((err, res) => {
         assert.equal(res.body.valid, false);
         assert.equal(res.body.conflict.length, 2);
