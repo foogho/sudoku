@@ -51,7 +51,7 @@ suite('Functional Tests', () => {
       test('Puzzle with length greater than 81', (done) => {
         const puzzleGreaterThan81 = puzzle.concat('4');
         requester
-          .post('api/solve')
+          .post('/api/solve')
           .send({
             puzzle: puzzleGreaterThan81,
           })
@@ -95,7 +95,7 @@ suite('Functional Tests', () => {
   test('Check a puzzle placement with single placement conflict: POST request to /api/check', (done) => {
     const checkPayload = { puzzle, coordinate: 'A2', value: '4' };
     requester
-      .post('api/check')
+      .post('/api/check')
       .send(checkPayload)
       .end((err, res) => {
         assert.equal(res.body.valid, false);
