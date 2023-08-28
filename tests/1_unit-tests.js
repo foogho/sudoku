@@ -13,14 +13,14 @@ suite('Unit Tests', () => {
 
   test('Logic handles a puzzle string with invalid characters (not 1-9 or .)', () => {
     const puzzle = samplePuzzle.replace(/\d/, 'a');
-    const result = solver.validate(puzzle);
-    assert.equal(result, false);
+    assert.throw(() => solver.validate(puzzle), 'Invalid characters in puzzle');
   });
 
   test('Logic handles a puzzle string that is not 81 characters in length', () => {
     const puzzle = samplePuzzle.slice(1);
-    const result = solver.validate(puzzle);
-    assert.equal(result, false);
+    assert.throw(() => {
+      solver.validate(puzzle);
+    }, 'Expected puzzle to be 81 characters long');
   });
 
   test('Logic handles a valid row placement', () => {

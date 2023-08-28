@@ -1,7 +1,9 @@
 class SudokuSolver {
   validate(puzzleString) {
-    if (!/^(\d|\.)+$/.test(puzzleString)) return false;
-    if (puzzleString.length !== 81) return false;
+    if (!/^(\d|\.)+$/.test(puzzleString))
+      throw new Error('Invalid characters in puzzle');
+    if (puzzleString.length !== 81)
+      throw new Error('Expected puzzle to be 81 characters long');
     return true;
   }
 
