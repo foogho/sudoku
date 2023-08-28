@@ -61,7 +61,7 @@ class SudokuSolver {
           }
         }
         if (candidates.length === 0)
-          throw new Error('puzzle can not be solved');
+          throw new Error('Puzzle cannot be solved');
         if (candidates.length > 1) continue;
         puzzleString =
           puzzleString.substring(0, i) +
