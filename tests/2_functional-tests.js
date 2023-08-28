@@ -14,13 +14,13 @@ suite('Functional Tests', () => {
       .post('/api/solve')
       .send({ puzzle })
       .end((err, res) => {
-        assert.equal(res.body, { solution: puzzlesAndSolutions[0][1] });
+        assert.equal(res.body.solution, puzzlesAndSolutions[0][1]);
         done();
       });
   });
   test('Solve a puzzle with missing puzzle string: POST request to /api/solve', (done) => {
     requester.post('/api/solve').end((err, res) => {
-      assert.equal(res.body, { error: 'Required field missing' });
+      assert.equal(res.body.error, 'Required field missing');
       done();
     });
   });
@@ -31,7 +31,7 @@ suite('Functional Tests', () => {
       .post('/api/solve')
       .send({ puzzle: puzzleWithInvalidCharacters })
       .end((err, res) => {
-        assert.equal(res.body, { error: 'Invalid characters in puzzle' });
+        assert.equal(res.body.error, 'Invalid characters in puzzle');
         done();
       });
   });
@@ -44,9 +44,7 @@ suite('Functional Tests', () => {
           .post('/api/solve')
           .send({ puzzle: puzzleLessThan81 })
           .end((err, res) => {
-            assert(res.body, {
-              error: 'Expected puzzle to be 81 characters long',
-            });
+            assert(res.body.error, 'Expected puzzle to be 81 characters long');
             done();
           });
       });
@@ -58,9 +56,10 @@ suite('Functional Tests', () => {
             puzzle: puzzleGreaterThan81,
           })
           .end((err, res) => {
-            assert.equal(res.body, {
-              error: 'Expected puzzle to be 81 characters long',
-            });
+            assert.equal(
+              res.body.error,
+              'Expected puzzle to be 81 characters long'
+            );
             done();
           });
       });
@@ -75,7 +74,7 @@ suite('Functional Tests', () => {
         puzzle: unsolvablePuzzle,
       })
       .end((err, res) => {
-        assert.equal(res.body, { error: 'Puzzle cannot be solved' });
+        assert.equal(res.body.error, 'Puzzle cannot be solved');
         done();
       });
   });
@@ -89,7 +88,7 @@ suite('Functional Tests', () => {
       .post('/api/check')
       .send(checkPayload)
       .end((err, res) => {
-        assert.equal(res.body, { valid: true });
+        assert.equal(res.body.valid, true);
         done();
       });
   });
@@ -100,7 +99,8 @@ suite('Functional Tests', () => {
       .send(checkPayload)
       .end((err, res) => {
         assert.equal(res.body.valid, false);
-        assert.deepEqual(res.body.conflict, ['row']);
+        assert.deepEqual(res.body.conflict.length, 1);
+        assert.deepEqual(res.body.conflict[0], 'row');
         done();
       });
   });
@@ -137,7 +137,7 @@ suite('Functional Tests', () => {
       .post('/api/check')
       .send(invalidCheckPayload)
       .end((err, res) => {
-        assert.equal(res.body, { error: 'Required field(s) missing' });
+        assert.equal(res.body.error, 'Required field(s) missing');
         done();
       });
   });
@@ -151,7 +151,7 @@ suite('Functional Tests', () => {
       .post('/api/check')
       .send(checkPayload)
       .end((err, res) => {
-        assert.equal(res.body, { error: 'Invalid characters in puzzle' });
+        assert.equal(res.body.error, 'Invalid characters in puzzle');
         done();
       });
   });
@@ -165,9 +165,10 @@ suite('Functional Tests', () => {
       .post('/api/check')
       .send(checkPayload)
       .end((err, res) => {
-        assert.equal(res.body, {
-          error: 'Expected puzzle to be 81 characters long',
-        });
+        assert.equal(
+          res.body.error,
+          'Expected puzzle to be 81 characters long'
+        );
         done();
       });
   });
@@ -177,7 +178,7 @@ suite('Functional Tests', () => {
       .post('/api/check')
       .send(checkPayload)
       .end((err, res) => {
-        assert.equal(res.body, { error: 'Invalid coordinate' });
+        assert.equal(res.body.error, 'Invalid coordinate');
         done();
       });
   });
@@ -187,7 +188,7 @@ suite('Functional Tests', () => {
       .post('/api/check')
       .send(checkPayload)
       .end((err, res) => {
-        assert.equal(res.body, { error: 'Invalid value' });
+        assert.equal(res.body.error, 'Invalid value');
         done();
       });
   });
