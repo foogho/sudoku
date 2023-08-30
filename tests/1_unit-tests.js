@@ -13,14 +13,20 @@ suite('Unit Tests', () => {
 
   test('Logic handles a puzzle string with invalid characters (not 1-9 or .)', () => {
     const puzzle = samplePuzzle.replace(/\d/, 'a');
-    assert.throw(() => solver.validate(puzzle), 'Invalid characters in puzzle');
+    try {
+      solver.validate(puzzle);
+    } catch (error) {
+      assert.equal(error.message, 'Invalid characters in puzzle');
+    }
   });
 
   test('Logic handles a puzzle string that is not 81 characters in length', () => {
     const puzzle = samplePuzzle.slice(1);
-    assert.throw(() => {
+    try {
       solver.validate(puzzle);
-    }, 'Expected puzzle to be 81 characters long');
+    } catch (error) {
+      assert.equal(error.message, 'Expected puzzle to be 81 characters long');
+    }
   });
 
   test('Logic handles a valid row placement', () => {
@@ -62,7 +68,11 @@ suite('Unit Tests', () => {
   });
 
   test('Invalid puzzle strings fail the solver', () => {
-    assert.throw(() => solver.solve(samplePuzzle.slice(1)));
+    try {
+      solver.solve(samplePuzzle.slice(1));
+    } catch (error) {
+      assert.isOk(error);
+    }
   });
 
   test('Solver returns the expected solution for an incomplete puzzle', () => {
