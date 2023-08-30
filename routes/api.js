@@ -57,7 +57,7 @@ const rows = {
 // this function parses coordinates like 'A3', 'B4', ...
 // and returns {row : 1 , column : 3}, {row : 2 , column : 4}, ...
 function parseCoordinate(coordinate) {
-  if (!/[A-Ia-i]/.test(coordinate)) {
+  if (!/^[A-Ia-i][1-9]$/.test(coordinate)) {
     throw new Error('Invalid coordinate');
   }
   return {
