@@ -44,7 +44,10 @@ suite('Functional Tests', () => {
           .post('/api/solve')
           .send({ puzzle: puzzleLessThan81 })
           .end((err, res) => {
-            assert(res.body.error, 'Expected puzzle to be 81 characters long');
+            assert.equal(
+              res.body.error,
+              'Expected puzzle to be 81 characters long'
+            );
             done();
           });
       });
