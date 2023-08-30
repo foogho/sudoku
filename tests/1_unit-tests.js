@@ -44,7 +44,11 @@ suite('Unit Tests', () => {
   });
 
   test('Logic handles a valid region (3x3 grid) placement', () => {
-    const result = solver.checkRegionPlacement(samplePuzzle, 2, 1, 3);
+    let result;
+    result = solver.checkRegionPlacement(samplePuzzle, 2, 1, 3);
+    assert.equal(result, true);
+    // check existing valid value placement
+    result = solver.checkRegionPlacement(samplePuzzle, 1, 3, 5);
     assert.equal(result, true);
   });
 

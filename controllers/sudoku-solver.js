@@ -34,8 +34,10 @@ class SudokuSolver {
     );
     let grid = '';
     for (let i = firstGridCellIdx; i < firstGridCellIdx + 20; i += 9) {
-      if (i === cellIdx) continue;
-      for (let j = 0; j < 3; j++) grid += puzzleString[i + j];
+      for (let j = 0; j < 3; j++) {
+        if (i + j === cellIdx) continue;
+        grid += puzzleString[i + j];
+      }
     }
     return !grid.includes(value);
   }
