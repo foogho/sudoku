@@ -11,7 +11,7 @@ module.exports = function (app) {
       if (!puzzle || !coordinate || !value)
         throw new Error('Required field(s) missing');
       solver.validate(puzzle);
-      if (+value < 1 || +value > 9) throw new Error('Invalid value');
+      if (!/^[1-9]$/.test(value)) throw new Error('Invalid value');
       const { row, column } = parseCoordinate(coordinate);
       const conflict = [];
       if (!solver.checkColPlacement(puzzle, row, column, value))
